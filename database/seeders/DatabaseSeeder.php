@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
 
         Admin::create([
             'name' => 'amine',
-            'email' => 'a.daaboub7815@gmail.com',
+            'email' => 'a.daaboub7815@uca.ac.ma',
             'password' => Hash::make("amineest")
         ]);
     }

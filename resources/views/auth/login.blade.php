@@ -25,7 +25,11 @@
 <body class="bg-gradient-primary">
 
     <div class="container">
-
+        @if ($errors->has('email'))
+        <div class="alert alert-danger">
+            {{ $errors->first('email') }}
+        </div>
+    @endif
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
