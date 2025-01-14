@@ -3,6 +3,7 @@
 use App\Http\Controllers\user\reservationController;
 use App\Http\Controllers\user\UserController;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::post('/register', [UserController::class, 'create'])->name('user.create');
 
@@ -10,7 +11,7 @@ Route::get('/', function()
 {
 return view('user.welcome');
 });
-Route::middleware(['auth:web'])->group(function () {
+Route::middleware(['auth:web'])->prefix(LaravelLocalization::setLocale())->group(function () {
     
 
     Route::get('/reservations/xml', [ReservationController::class, 'ReservationHistory'])->name('reservations.xml');

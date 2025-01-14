@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container my-4">
-        <h2>Liste des Salles Disponibles</h2>
+        <h2>{{ __('messages.room_list') }}</h2>
 
         @if($salles->isEmpty())
             <div class="alert alert-warning">

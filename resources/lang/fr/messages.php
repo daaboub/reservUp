@@ -1,0 +1,31 @@
+<?php
+return [
+    'room_list' => 'Liste des Salles',
+    'menu_room' => 'Salles',
+    'menu_GDS' => 'Gestion des salles',
+    'menu_room_create' => 'Crée une salle',
+    'menu_room_import' => 'Importer depuis XML',
+    'menu_room_export' => 'Exporter depuis XML',
+    'menu_GDA' => 'Gestion des admins',
+    'menu_admin' => 'Administrateurs',
+    'menu_admin_list' => 'Liste des Admins',
+    'menu_admin_create' => 'Crée un Admin',
+    'menu_room_GDR' => 'Gestion des Réservations',
+    'menu_room_reservation' => 'Réservations',
+    'menu_reservation_list' => 'Liste des Réservations',
+    'menu_reservation_history' => 'Historique des Réservations',
+
+    'salle_index_search' => 'Rechercher une salle',
+    'salle_index_search_btn' => 'Rechercher',
+    'salle_index_nom' => 'Nom',
+    'salle_index_capacite' => 'Capacité',
+    'salle_index_disponibilite' => 'Disponibilité',
+    'salle_index_equipement' => 'Équipements',
+    'salle_index_action' => 'Actions',
+    'salle_index_modify_btn' => 'Modifier',
+    'salle_index_delete_btn' => 'Supprimer',
+    'salle_index_empty' => 'Aucune salle trouvée',
+
+    'users' => 'Utilisateurs',
+    'users_list' => 'Liste des Utilisateurs',
+];

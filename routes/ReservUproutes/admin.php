@@ -4,9 +4,12 @@ use App\Http\Controllers\admins\AdminController;
 use App\Http\Controllers\admins\dashController;
 use App\Http\Controllers\admins\ReservationController;
 use App\Http\Controllers\admins\SalleController;
+use App\Http\Controllers\admins\UsersController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-Route::middleware(['auth:admin'])->prefix("admin/dashboard")->group(function () {
+Route::middleware(['auth:admin'])->prefix(LaravelLocalization::setLocale() ."/admin/dashboard")->group(function () {
 
     Route::get('/salles/export', [SalleController::class, 'exportToXml'])->name('salles.export');
     Route::resource('salles', SalleController::class);
@@ -15,7 +18,10 @@ Route::middleware(['auth:admin'])->prefix("admin/dashboard")->group(function () 
     Route::post('/salle/import', [SalleController::class, 'import'])->name('salle.import');
 
 
-    
+    Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+    Route::post('/users/{user}/suspend', [UsersController::class, 'suspend'])->name('users.suspend');
+
+
  // Afficher la liste des administrateurs
  Route::get('/admins', [AdminController::class, 'index'])->name('admin.index');
 
@@ -42,5 +48,11 @@ Route::middleware(['auth:admin'])->prefix("admin/dashboard")->group(function () 
     Route::put('/reservations/{id}/status', [ReservationController::class, 'updateStatus'])->name('reservations.updateStatus');
 
 
+    // Route::get('language/{locale}', function ($locale) {
+    //     if (in_array($locale, ['en', 'fr'])) {
+    //         session()->put('locale', $locale);
+    //     }
+    //     return redirect()->back();
+    // })->name('change.language');
 
 });

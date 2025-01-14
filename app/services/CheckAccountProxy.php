@@ -13,7 +13,7 @@ class CheckAccountProxy
             return true; 
         }
 
-        return false; ; 
+        return false;
     }
 
     

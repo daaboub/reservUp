@@ -67,16 +67,16 @@
             <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseSalle" aria-expanded="true"
                 aria-controls="collapseSalle">
                 <i class="fas fa-fw fa-building"></i>
-                <span>Salles</span>
+                <span>{{ __('messages.menu_room') }}</span>
             </a>
             <div id="collapseSalle" class="collapse show" aria-labelledby="headingSalle"
                 data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Gestion des Salles :</h6>
-                    <a class="collapse-item" href="{{ route('salles.index') }}">Liste des Salles</a>
-                    <a class="collapse-item" href="{{ route('salles.create') }}">Créer une Salle</a>
-                    <a class="collapse-item" href="{{ route('salle.import.form') }}">Importer depuis XML</a>
-                    <a class="collapse-item" href="{{ route('salles.export') }}">Exporter en XML</a>
+                    <h6 class="collapse-header">{{ __('messages.menu_GDS') }}</h6>
+                    <a class="collapse-item" href="{{ route('salles.index') }}">{{ __('messages.room_list') }}</a>
+                    <a class="collapse-item" href="{{ route('salles.create') }}">{{ __('messages.menu_room_create') }}</a>
+                    <a class="collapse-item" href="{{ route('salle.import.form') }}">{{ __('messages.menu_room_import') }}</a>
+                    <a class="collapse-item" href="{{ route('salles.export') }}">{{ __('messages.menu_room_export') }}</a>
                 </div>
             </div>
         </li>
@@ -85,13 +85,26 @@
             <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseAdmin" aria-expanded="true"
                 aria-controls="collapseAdmin">
                 <i class="fas fa-fw fa-user-shield"></i>
-                <span>Administrateurs</span>
+                <span>{{ __('messages.menu_admin') }}</span>
             </a>
             <div id="collapseAdmin" class="collapse show" aria-labelledby="headingAdmin" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Gestion des Admins :</h6>
-                    <a class="collapse-item" href="{{ route('admin.index') }}">Liste des Admins</a>
-                    <a class="collapse-item" href="{{ route('admin.create') }}">Créer un Admin</a>
+                    <h6 class="collapse-header">{{ __('messages.menu_GDA') }}</h6>
+                    <a class="collapse-item" href="{{ route('admin.index') }}">{{ __('messages.menu_admin_list') }}</a>
+                    <a class="collapse-item" href="{{ route('admin.create') }}">{{ __('messages.menu_admin_create') }}</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseUser" aria-expanded="true"
+                aria-controls="collapseUser">
+                <i class="fas fa-fw fa-user-shield"></i>
+                <span>{{ __('messages.users') }}</span>
+            </a>
+            <div id="collapseUser" class="collapse show" aria-labelledby="headingAdmin" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">{{ __('messages.users_list') }}</h6>
+                    <a class="collapse-item" href="{{ route('users.index') }}">{{ __('messages.users_list') }}</a>
                 </div>
             </div>
         </li>
@@ -100,12 +113,12 @@
             <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseReservations" aria-expanded="false"
                aria-controls="collapseReservations">
                 <i class="fas fa-fw fa-calendar-check"></i>
-                <span>Réservations</span>
+                <span>{{ __('messages.menu_room_reservation') }}</span>
             </a>
             <div id="collapseReservations" class="collapse" aria-labelledby="headingReservations" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Gestion des Réservations :</h6>
-                    <a class="collapse-item" href="{{ route('reservations.index') }}">Liste des Réservations</a>
+                    <h6 class="collapse-header">{{ __('messages.menu_room_GDR') }}</h6>
+                    <a class="collapse-item" href="{{ route('reservations.index') }}">{{ __('messages.menu_reservation_list') }}</a>
                 </div>
             </div>
         </li>
@@ -114,13 +127,13 @@
             <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseAdmin" aria-expanded="true"
                 aria-controls="collapseAdmin">
                 <i class="fas fa-fw fa-user-shield"></i>
-                <span>Réservation</span>
+                <span>{{ __('messages.menu_room_reservation') }}</span>
             </a>
             <div id="collapseAdmin" class="collapse show" aria-labelledby="headingAdmin" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Réservation :</h6>
-                    <a class="collapse-item" href="{{ route('reservation.index') }}">Liste des Salle</a>
-                    <a class="collapse-item" href="{{ route('reservations.xml') }}">Historique des Réservations</a>
+                    <h6 class="collapse-header">{{ __('messages.menu_room_reservation') }}:</h6>
+                    <a class="collapse-item" href="{{ route('reservation.index') }}">{{ __('messages.menu_reservation_list') }}</a>
+                    <a class="collapse-item" href="{{ route('reservations.xml') }}">{{ __('messages.menu_reservation_history') }}</a>
                 </div>
             </div>
         </li>
@@ -152,7 +165,27 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/flags/{{ LaravelLocalization::getCurrentLocale() }}.svg" alt="{{ LaravelLocalization::getCurrentLocaleName() }}" style="width: 20px;" class="me-2">
+                            {{ LaravelLocalization::getCurrentLocaleName() }}
+                        </button>
+                     
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                    {{ $properties['native'] }}
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
                     <!-- Topbar Search -->
+                    {{-- <a href="{{ route('change.language', ['lang' => 'en']) }}">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" width="20" alt="English">
+                    </a>
+                    <a href="{{ route('change.language', ['lang' => 'fr']) }}">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg" width="20" alt="Français">
+                    </a> --}}
                     {{-- <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">

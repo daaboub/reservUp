@@ -7,6 +7,7 @@ use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
 use App\Models\Admin;
+use App\Models\User;
 use App\Services\AdminPermissionsProxy;
 use App\Services\CheckAccountProxy;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -33,7 +34,11 @@ class FortifyServiceProvider extends ServiceProvider
             Config::set("fortify.guard","admin");
             Config::set("fortify.passwords","admins");
             Config::set("fortify.prefix","admin");
-            Config::set("fortify.home","admin/dashboard");
+            Config::set("fortify.home","admin/dashboard/salle");
+        }else
+        {
+            
+            Config::set("fortify.home","/reservations");
         }
     }
 
@@ -56,12 +61,19 @@ class FortifyServiceProvider extends ServiceProvider
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
 
-        if(Config::get('fortify.guard') == 'admin'){
+        // if(Config::get('fortify.guard') == 'admin'){
 
             Fortify::viewPrefix('auth.');
 
             Fortify::authenticateUsing(function (Request $request) {
-                $admin = Admin::where('email', $request->email)->first();
+                if(Config::get('fortify.guard') == 'admin')
+                {
+                    $admin = Admin::where('email', $request->email)->first();
+                    
+                }else{
+                    
+                    $admin = User::where('email', $request->email)->first();
+                }
         
                 // Vérifier si l'admin existe et si son compte est suspendu
                 if ($admin) {
@@ -84,10 +96,10 @@ class FortifyServiceProvider extends ServiceProvider
                 // Si l'admin n'existe pas ou le mot de passe est incorrect
                 return null;
             });
-        }else{
+        // }else{
             
-            Fortify::viewPrefix("user.auth.");
-        }
+        //     Fortify::viewPrefix("user.auth.");
+        // }
       
     }
 }
